@@ -11,13 +11,13 @@ class CategoryController extends Controller
     {
         $categorys = $this->getNewsCategories();
 
-        return view('news.category', ['listCategoryNews' => $categorys]);
+        return view('category.index', ['listCategoryNews' => $categorys]);
     }
 
     public function show(string $category)
     {
         $list= $this->getNewsCategories($category);
-//        dd($list);
-        return view('news.showCategory', ['listCategoryNews' =>  $list, 'title' => $category]);
+
+        return view('category.show', ['listCategoryNews' =>  $list, 'title' => $category]);
     }
 }
