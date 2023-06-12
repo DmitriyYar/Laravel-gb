@@ -15,6 +15,7 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request): View
     {
+//        dd($request->all());
         return view('admin.index');
     }
 }
