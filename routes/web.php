@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +39,5 @@ Route::get('/news/{id}', [NewsController::class, 'show'])
     ->name('news.show');
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
+Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');;
