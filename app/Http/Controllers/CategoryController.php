@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -9,15 +10,19 @@ class CategoryController extends Controller
     // list news categories
     public function index()
     {
-        $categorys = $this->getNewsCategories();
+        $model = app(Category::class);
 
-        return view('category.index', ['listCategoryNews' => $categorys]);
+        return view('category.index', ['listCategoryNews' => $model->getCategories()]);
     }
 
-    public function show(string $category)
+    public function show(int $id) // передать id   string $category
     {
-        $list= $this->getNewsCategories($category);
+        $model = app(Category::class);
 
-        return view('category.show', ['listCategoryNews' =>  $list, 'title' => $category]);
+        $category = $model->getCategoryById($id);
+
+        $listCategoryNews = $model->getNewsCategoryById($id); // получил категорию с id=1
+
+        return view('category.show', ['listCategoryNews' => $listCategoryNews, 'title' => $category->title]);
     }
 }

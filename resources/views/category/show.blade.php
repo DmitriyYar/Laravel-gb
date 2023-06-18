@@ -1,5 +1,6 @@
 @extends('layouts.main')
-@section('title')Список  новостей @parent
+@section('title')
+    Список  новостей @parent
 @endsection
 @section('content')
     <div class="container">
@@ -8,29 +9,20 @@
             @forelse ($listCategoryNews as $key => $news)
                 <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"/>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
-
+                        <img src="{{ $news->image }}" alt="Image"/>
                         <div class="card-body">
-                            <p><strong><a
-                                        href="{{ route('news.show', ['id' => $key]) }}">{{ $news['title'] }}</a></strong>
+                            <p>
+                                <strong> <a href="{{ route('news.show', ['id' => $news->id]) }}">{{ $news->title }}</a></strong>
                             </p>
-                            <p class="card-text">{!! $news['description'] !!}</p>
+                            <p class="card-text">{!! $news->description !!}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('news.show', ['id' => $key]) }}" type="button"
+                                    <a href="{{ route('news.show', ['id' => $news->id]) }}" type="button"
                                        class="btn btn-sm btn-outline-secondary">Подробнее</a>
                                 </div>
-                                <small class="text-muted">{{ $news['author'] }}
-                                    - {{ $news['created_at']->format('d-m-Y H:i') }}</small>
+                                <small class="text-muted">{{ $news->author }} - {{ $news->created_at }}</small>
                             </div>
                         </div>
-
                     </div>
                 </div>
             @empty

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,8 +13,9 @@ class NewsController extends Controller
     // list all news
     public function index()
     {
-//        dd($this->getNews());
-        $news = $this->getNews();
+        $model = app(News::class);
+
+        $news = $model->getNews();
 
         return view('news.index', ['newsList' => $news]);
     }
@@ -21,7 +23,9 @@ class NewsController extends Controller
     // return current news
     public function show(int $id)
     {
-        $news = $this->getNews($id);
+        $model = app(News::class);
+
+        $news = $model->getNewsById($id);
 
         return view('news.show', ['news' => $news]);
     }
