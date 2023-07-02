@@ -3,25 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Queries\CategoriesQueryBuilder;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
     // list news categories
-    public function index()
+    public function index(CategoriesQueryBuilder $categoriesQueryBuilder): View
     {
-        $model = app(Category::class);
+        $categories = $categoriesQueryBuilder->getModel()->get();
 
-        return view('category.index', ['listCategoryNews' => $model->getCategories()]);
+        return view('category.index', ['listCategory' =>  $categories]);
     }
 
-    public function show(int $id) // передать id   string $category
+    public function show(Category $category): View
     {
-        $model = app(Category::class);
-
-        $category = $model->getCategoryById($id);
-
-        $listCategoryNews = $model->getNewsCategoryById($id); // получил категорию с id=1
+        $listCategoryNews = $category->news->map(fn($item) => $item);
 
         return view('category.show', ['listCategoryNews' => $listCategoryNews, 'title' => $category->title]);
     }
