@@ -9,11 +9,11 @@
                 <img src="{{ $news->image }}" alt="Image" />
 
                 <div class="card-body">
-                    <p><strong><a href="{{ route('news.show', ['id' => $news->id]) }}">{{ $news->title }}</a></strong></p>
+                    <p><strong><a href="{{ route('news.show', ['news' => $news->id]) }}">{{ $news->title }}</a></strong></p>
                     <p class="card-text">{!! $news->description !!}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="{{ route('news.show', ['id' =>$news->id]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                            <a href="{{ route('news.show', ['news' =>$news->id]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                         </div>
                         <small class="text-muted">{{ $news->author }} - {{ $news->created_at }}</small>
                     </div>
