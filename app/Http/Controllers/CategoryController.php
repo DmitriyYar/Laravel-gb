@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
     public function show(Category $category): View
     {
-        $listCategoryNews = $category->news->map(fn($item) => $item);
+        $listCategoryNews = $category->news;
 
         return view('category.show', ['listCategoryNews' => $listCategoryNews, 'title' => $category->title]);
     }
