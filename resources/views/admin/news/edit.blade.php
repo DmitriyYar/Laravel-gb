@@ -20,14 +20,17 @@
                     <option @if(in_array($category->id, $news->categories->pluck('id')->toArray())) selected @endif value="{{ $category->id }}">{{ $category->title }}</option>
                 @endforeach
             </select>
+            @error('categories') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <div class="form-group">
             <label for="title">Заголовок</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ $news->title }}">
+            @error('title') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <div class="form-group">
             <label for="author">Автор</label>
             <input type="text" name="author" id="author" class="form-control" value="{{ $news->author }}">
+            @error('author') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <div class="form-group">
             <label for="image">Изображение</label>
@@ -36,10 +39,11 @@
         <div class="form-group">
             <label for="status">Статус</label>
             <select name="status" id="status" class="form-control">
-                <option @if($news->status === 'DRAFT') selected @endif>DRAFT</option>
-                <option @if($news->status === 'ACTIVE') selected @endif>ACTIVE</option>
-                <option @if($news->status === 'BLOCKED') selected @endif>BLOCKED</option>
+                <option @if($news->status === 'draft') selected @endif value="{{ \App\Emums\NewsStatus::DRAFT->value }}">DRAFT</option>
+                <option @if($news->status === 'active') selected @endif value="{{ \App\Emums\NewsStatus::ACTIVE->value }}">ACTIVE</option>
+                <option @if($news->status === 'blocked') selected @endif value="{{ \App\Emums\NewsStatus::BLOCKED->value }}">BLOCKED</option>
             </select>
+            @error('status') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <div class="form-group">
             <label for="description">Описание</label>

@@ -23,6 +23,7 @@
         <div class="form-group">
             <label for="title">Новая категория</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
+            @error('title') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <div class="form-group">
             <label for="description">Описание</label>
