@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SocialProviderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+//    dd(app());
 });
 
 Route::group(['middleware' => 'auth'], static function () {
@@ -43,10 +46,22 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::match(['post', 'get'],'/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::match(['post', 'get'],'/profile/isAdmin', [ProfileController::class, 'updateIsAdmin'])->name('profile.updateIsAdmin');
+        Route::get('/parser/{site}', ParserController::class)->name('parser');
     });
 });
 
 // Guest's routes
+
+Route::group(['middleware' => 'guest'], function(){
+    Route::get('/{driver}/redirect', [SocialProviderController::class, 'redirect'])
+        ->where('driver', '\w+')
+        ->name('social-provider.redirect');
+
+    Route::get('/{driver}/callback', [SocialProviderController::class, 'callback'])
+        ->where('driver', '\w+')
+        ->name('social-provider.callback');
+});
+
 Route::get('/hello', [HelloController::class, 'index'])->name('hello');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'show'])
