@@ -19,6 +19,18 @@
                     Новости
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.profile.index')) active @endif" href="{{ route('admin.profile.index') }}">
+                    <span data-feather="user" class="align-text-bottom"></span>
+                    Профиль
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.users.index')) active @endif" href="{{ route('admin.users.index') }}">
+                    <span data-feather="user" class="align-text-bottom"></span>
+                    Пользователи
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
