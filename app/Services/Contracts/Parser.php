@@ -17,5 +17,5 @@ interface Parser
      * @param string $site
      * @return array
      */
-    public function saveParserData(string $site): array;
+    public function saveParserData(): void;
 }
