@@ -46,7 +46,8 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::match(['post', 'get'],'/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::match(['post', 'get'],'/profile/isAdmin', [ProfileController::class, 'updateIsAdmin'])->name('profile.updateIsAdmin');
-        Route::get('/parser/{site}', ParserController::class)->name('parser');
+//        Route::get('/parser/{site}', ParserController::class)->name('parser');
+        Route::get('/parser', ParserController::class)->name('parser');
     });
 });
 
